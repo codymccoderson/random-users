@@ -6,10 +6,25 @@ class UserCard extends Component {
         UserCard: "Fetching a user..."
     }
 
+    async componentDidMount () {
+        try {
+            const response = await fetch("https://randomuser.me/api/?results=1");
+            const data = await response.json();
+            console.log(data)
+            
+        } catch(error) {
+            this.setState({
+                error: error.message
+            })
+        }
+    }
+
     render() {
-        const {UserCard} = this.state
+        const {results} = this.state
         return(
-            <p>{UserCard}</p>
+            <div className="randomCard">
+                <p>{results}</p>
+            </div>
         )
     }
 }
