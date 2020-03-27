@@ -1,32 +1,18 @@
-import React, {Component } from "react";
+import React from 'react';
 
-class UserCard extends Component {
-
-    state = {
-        UserCard: "Fetching a user..."
-    }
-
-    async componentDidMount () {
-        try {
-            const response = await fetch("https://randomuser.me/api/?results=1");
-            const data = await response.json();
-            console.log(data)
-            
-        } catch(error) {
-            this.setState({
-                error: error.message
-            })
-        }
-    }
-
-    render() {
-        const {results} = this.state
-        return(
-            <div className="randomCard">
-                <p>{results}</p>
-            </div>
-        )
-    }
-}
+const UserCard = props => {
+    const {user} = props;
+    return (
+        <div>
+            <img 
+                src={user.picture.large}
+                alt={`${user.name.first} ${user.name.last}`}
+            />
+            <p>
+                {user.name.first} {user.name.last}
+            </p>
+        </div>
+    );
+};
 
 export default UserCard;
